@@ -27,14 +27,15 @@
         {% endfor %}
       {% endif %}
     {% endfor %} -->
+    <div onmouseup="clickityUp(event)" onmousedown="clickityDown(event)">
       <canvas id = "c">
 
       </canvas>
+    </div>
     {% endif %}
 <script type="text/javascript">
     var canvas = new fabric.Canvas('c');
-    canvas.setHeight(480);
-    canvas.setWidth(640);
+    canvas.setHeight(1000000000000);
     //
     // for (var i = 0; i < 20; i++){
     //   var imgInstance = new fabric.Image(imgElement, {
@@ -52,31 +53,56 @@
     //    canvas.add(img1);
     //   });
     // }
-    {% for p in pdfs  %}
-      {% if user in p.users.all %}
-        {% for count in counts %}
-          {% for c in count %}
-            fabric.Image.fromURL('media/{{p.url_path}}/{{p.url_path}}-0{{c}}.jpg', function(myImg) {
-             //i create an extra var for to change some image properties
-              myImg.selectable = false;
-              myImg.evented = false;
-             var img1 = myImg.set({ left: 0, top: 0 ,width:1000,height:1000});
-             canvas.add(img1);
-            });
-          {% endfor %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-
     window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas() {
       canvas.setHeight(window.innerHeight);
+      // canvas.setHeight(100000000);
       canvas.setWidth(window.innerWidth);
       canvas.renderAll();
     }
 
     // resize on init
     resizeCanvas();
+
+    height = 0;
+    {% for p in pdfs  %}
+      {% if user in p.users.all %}
+        {% for count in counts %}
+          {% for c in count %}
+            fabric.Image.fromURL('media/{{p.url_path}}/{{p.url_path}}-0{{c}}.jpg', function(myImg) {
+             //i create an extra var for to change some image properties
+             myImg.selectable = false;
+             myImg.evented = false;
+             console.log(height);
+             var img1 = myImg.set({ left: 0, top: -height});
+             myImg.scaleToWidth(window.innerHeight);
+             canvas.add(img1);
+             height+=myImg.height;
+            });
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    // canvas.on('mouse:wheel', function(e) {
+    //   console.log("sdf");
+    // });
+    start = []
+    end = []
+    function clickityDown(e) {
+      var x = event.clientX;
+      var y = event.clientY;
+      var coords = "DownX coords: " + x + ", Y coords: " + y;
+      start = [x, y];
+      console.log(coords)
+    }
+    function clickityUp(e) {
+      var x = event.clientX;
+      var y = event.clientY;
+      var coords = "DownX coords: " + x + ", Y coords: " + y;
+      end = x, y;
+      console.log(coords)
+    }
+
 </script>
 {% endblock %}
