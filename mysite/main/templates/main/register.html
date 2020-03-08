@@ -1,0 +1,24 @@
+<!-- # pART OF CODE IS FROM:
+# https://pythonprogramming.net/user-login-logout-django-tutorial/?completed=/messages-django-tutorial/
+ -->
+{% extends 'main/header.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <br />
+          <form method="POST">
+              {% csrf_token %}
+              {{ form|crispy }}
+               <button class="btn btn-success" type="submit">Sign Up</button>
+          </form>
+
+
+    If you already have an account <a href="/login" target="blank"><strong>login</strong></a> instead.
+        </div>
+      </div>
+    </div>
+{% endblock %}

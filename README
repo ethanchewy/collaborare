@@ -6,4 +6,9 @@ This app tackles 2 main issues I've seen in education:
 
 This app has 2 components:
 1) Web app that allows students to discuss various parts of a notes document.
-2) Data analysis platform that allows instructors to pinpoint what conceptual gaps and misconceptions students might have with course content. It also allows for instructors to understand what is unclear in the notes. 
+2) Data analysis platform that allows instructors to pinpoint what conceptual gaps and misconceptions students might have with course content. It also allows for instructors to understand what is unclear in the notes.
+
+Credits:
+Registration/login code:https://pythonprogramming.net/user-login-logout-django-tutorial/?completed=/messages-django-tutorial/
+
+All other code (models, logic for adding comments, etc.) were written by me

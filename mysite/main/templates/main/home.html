@@ -1,0 +1,37 @@
+{% extends 'main/header.html' %}
+
+{% block content %}
+  <div class="row">
+    <!-- {% for p in pdfs %}
+    <div class="container-fluid px-0">
+     <div class="row">
+      <div class="col-md-12">
+        <img src="https://place-hold.it/1300x400/?text=1300x400&fontsize=33" alt="placeholder 960" class="img-responsive"/>
+      </div>
+        </div>
+    </div>
+    {% endfor %} -->
+    {% if user.is_authenticated %}
+      {% for p in pdfs  %}
+        {% if user in p.users.all %}
+          {% for count in counts %}
+            {% for c in count %}
+              <!-- <p>
+                "hello"
+              </p>
+              <p>
+                {{c}}
+              </p> -->
+              <div class="container-fluid px-0">
+               <div class="row">
+                <div class="col-md-12">
+                  <img src="media/{{p.url_path}}/{{p.url_path}}-0{{c}}.jpg" />
+                </div>
+                  </div>
+              </div>
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+{% endblock %}

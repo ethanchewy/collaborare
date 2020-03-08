@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 # from django.contrib.auth.models import AbstractUser, CustomUserManager
 
+
+   # you can add more fields here.
 # Create your models here.
 # class User(AbstractBaseUser):
 #     YEAR_IN_SCHOOL_CHOICES = [
@@ -27,6 +29,7 @@ from django.utils import timezone
 #
 # class Instructor(User):
 
+
 class PDF(models.Model):
     time_created = models.DateTimeField(default=timezone.now)
     time_public = models.DateTimeField(default=timezone.now)
@@ -36,6 +39,9 @@ class PDF(models.Model):
     # split categories and concepts by " "
     categories = models.CharField(max_length=100)
     concepts = models.CharField(max_length=100)
+    url_path = models.TextField(default="Nothing")
+    images_count = models.IntegerField(default=0)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='pdf_users')
 
 class Thread(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
