@@ -11,27 +11,72 @@
         </div>
     </div>
     {% endfor %} -->
-    {% if user.is_authenticated %}
-      {% for p in pdfs  %}
-        {% if user in p.users.all %}
-          {% for count in counts %}
-            {% for c in count %}
-              <!-- <p>
-                "hello"
-              </p>
-              <p>
-                {{c}}
-              </p> -->
-              <div class="container-fluid px-0">
-               <div class="row">
-                <div class="col-md-12">
-                  <img src="media/{{p.url_path}}/{{p.url_path}}-0{{c}}.jpg" />
-                </div>
-                  </div>
+    <!-- {% if user.is_authenticated %}
+    {% for p in pdfs  %}
+      {% if user in p.users.all %}
+        {% for count in counts %}
+          {% for c in count %}
+            <div class="container-fluid px-0">
+             <div class="row">
+              <div class="col-md-12">
+                <img src="media/{{p.url_path}}/{{p.url_path}}-0{{c}}.jpg" />
               </div>
-            {% endfor %}
+                </div>
+            </div>
           {% endfor %}
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %} -->
+      <canvas id = "c">
+
+      </canvas>
     {% endif %}
+<script type="text/javascript">
+    var canvas = new fabric.Canvas('c');
+    canvas.setHeight(480);
+    canvas.setWidth(640);
+    //
+    // for (var i = 0; i < 20; i++){
+    //   var imgInstance = new fabric.Image(imgElement, {
+    //       left: 100,
+    //       top: 100,
+    //       angle: 90,
+    //       opacity: 0.85
+    //   });
+    //   canvas.add(imgInstance);
+    // }
+    // for (var i = 0; i < 20; i++){
+    //   fabric.Image.fromURL('http://fabricjs.com/assets/pug_small.jpg', function(myImg) {
+    //    //i create an extra var for to change some image properties
+    //    var img1 = myImg.set({ left: 0, top: 0 ,width:150,height:150});
+    //    canvas.add(img1);
+    //   });
+    // }
+    {% for p in pdfs  %}
+      {% if user in p.users.all %}
+        {% for count in counts %}
+          {% for c in count %}
+            fabric.Image.fromURL('media/{{p.url_path}}/{{p.url_path}}-0{{c}}.jpg', function(myImg) {
+             //i create an extra var for to change some image properties
+              myImg.selectable = false;
+              myImg.evented = false;
+             var img1 = myImg.set({ left: 0, top: 0 ,width:1000,height:1000});
+             canvas.add(img1);
+            });
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    window.addEventListener('resize', resizeCanvas, false);
+
+    function resizeCanvas() {
+      canvas.setHeight(window.innerHeight);
+      canvas.setWidth(window.innerWidth);
+      canvas.renderAll();
+    }
+
+    // resize on init
+    resizeCanvas();
+</script>
 {% endblock %}
