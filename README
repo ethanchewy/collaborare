@@ -1,1 +1,9 @@
-Web app that allows students to discuss various parts of a notes document.
+HackTech 2020
+
+This app tackles 2 main issues I've seen in education:
+1) Students struggling to understand concepts even after reading the notes multiple times
+2) Instructors struggling to pinpoint what concepts students struggle with the most during the course
+
+This app has 2 components:
+1) Web app that allows students to discuss various parts of a notes document.
+2) Data analysis platform that allows instructors to pinpoint what conceptual gaps and misconceptions students might have with course content. It also allows for instructors to understand what is unclear in the notes. 
